@@ -8,7 +8,7 @@
 
 ## 形象来源
 
-本项目中的人物形象来自抖音创作者 **小欣子**，并据此制作为桌宠动画资源。请尊重形象及原创内容相关权益，不要用于冒用身份或未经授权的商业用途。
+本项目中的人物形象来自抖音创作者 **小欣子** /小红书 **咕咕氧气机✨**，并据此制作为桌宠动画资源。
 
 ## 功能
 
@@ -79,7 +79,9 @@ pnpm tauri:build
 
 GitHub Actions 会分别构建 Windows x64、macOS Intel 和 macOS Apple Silicon 安装包。详细说明见 [`BUILD.md`](BUILD.md)。
 
-## 关注与联系
+## 关注
 
-- 抖音：[小欣子（抖音号：Kkkkkkkkkkkk.kk）](https://v.douyin.com/Fbn30V0vwHI/) `3@9.com`
+点点关注！！！
+
+- 抖音：[小欣子（抖音号：Kkkkkkkkkkkk.kk）](https://v.douyin.com/Fbn30V0vwHI/) 
 - 小红书：[咕咕氧气机✨（小红书号：931795365）](https://xhslink.com/m/6N40fVdbjow)
