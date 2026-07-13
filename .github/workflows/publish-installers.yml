@@ -1,0 +1,86 @@
+name: Publish installers to repository
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful build workflow run ID
+        required: true
+        default: "29245642234"
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: pet-xiaoxinzi-windows-x64
+          path: downloads/windows-x64
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.run_id }}
+
+      - name: Download Intel macOS artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: pet-xiaoxinzi-macos-intel
+          path: downloads/macos-intel
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.run_id }}
+
+      - name: Download Apple Silicon macOS artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: pet-xiaoxinzi-macos-arm64
+          path: downloads/macos-arm64
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.run_id }}
+
+      - name: Collect installers
+        shell: bash
+        run: |
+          set -euo pipefail
+          destination="installers/v0.1.0"
+          mkdir -p "$destination"
+
+          windows_installer="$(find downloads/windows-x64 -type f -iname '*.exe' -print -quit)"
+          intel_installer="$(find downloads/macos-intel -type f -iname '*.dmg' -print -quit)"
+          arm_installer="$(find downloads/macos-arm64 -type f -iname '*.dmg' -print -quit)"
+
+          test -n "$windows_installer"
+          test -n "$intel_installer"
+          test -n "$arm_installer"
+
+          install -m 0644 "$windows_installer" "$destination/MengChong-XiaoXinZi_0.1.0_windows-x64-setup.exe"
+          install -m 0644 "$intel_installer" "$destination/MengChong-XiaoXinZi_0.1.0_macos-intel.dmg"
+          install -m 0644 "$arm_installer" "$destination/MengChong-XiaoXinZi_0.1.0_macos-arm64.dmg"
+
+          (
+            cd "$destination"
+            sha256sum *.exe *.dmg > SHA256SUMS.txt
+          )
+
+      - name: Commit installers
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add installers/v0.1.0
+
+          if git diff --cached --quiet; then
+            echo "Installers are already committed."
+            exit 0
+          fi
+
+          git commit -m "Add v0.1.0 desktop installers"
+          git push
