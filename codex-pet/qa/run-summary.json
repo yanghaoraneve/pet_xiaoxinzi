@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "run_dir": "/Users/haoranyang/咕咕氧气机/hatch-pet/gugu-run",
+  "spritesheet": "/Users/haoranyang/咕咕氧气机/hatch-pet/gugu-run/final/spritesheet.webp",
+  "validation": "/Users/haoranyang/咕咕氧气机/hatch-pet/gugu-run/final/validation.json",
+  "contact_sheet": "/Users/haoranyang/咕咕氧气机/hatch-pet/gugu-run/qa/contact-sheet.png",
+  "review": "/Users/haoranyang/咕咕氧气机/hatch-pet/gugu-run/qa/review.json",
+  "package": "/Users/haoranyang/.codex/pets/gugu"
+}

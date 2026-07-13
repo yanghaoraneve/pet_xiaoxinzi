@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>萌宠小欣子</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <main id="pet-root" aria-label="萌宠小欣子">
+      <img id="pet-frame" alt="小欣子" draggable="false" />
+      <div id="loading">正在唤醒小欣子…</div>
+    </main>
+
+    <nav id="pet-menu" hidden aria-label="桌宠菜单">
+      <div class="menu-title">萌宠小欣子</div>
+      <button data-state="idle">安静待机</button>
+      <button data-state="waving">挥手</button>
+      <button data-state="jumping">跳一下</button>
+      <button data-state="waiting">等待</button>
+      <button data-state="running">认真处理</button>
+      <button data-state="review">仔细查看</button>
+      <button data-state="failed">沮丧</button>
+      <div class="separator"></div>
+      <button data-action="toggle-walk">暂停自动移动</button>
+      <button data-action="resize">切换大小</button>
+      <button data-action="reset-position">回到右下角</button>
+      <div class="separator"></div>
+      <button class="danger" data-action="quit">退出</button>
+    </nav>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

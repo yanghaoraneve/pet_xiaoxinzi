@@ -1,0 +1,4 @@
+[[permission]]
+identifier = "allow-app-commands"
+description = "Allow the lightweight desktop pet commands"
+commands.allow = ["set_walking", "reset_position", "quit_app"]
