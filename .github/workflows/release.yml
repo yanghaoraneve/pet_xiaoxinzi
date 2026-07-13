@@ -1,0 +1,44 @@
+name: Publish GitHub Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag
+        required: true
+        default: "v0.1.0"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create release and upload installers
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release edit "$RELEASE_TAG" \
+              --title "萌宠小欣子 $RELEASE_TAG" \
+              --notes-file .github/release-v0.1.0.md
+          else
+            gh release create "$RELEASE_TAG" \
+              --target "$GITHUB_SHA" \
+              --title "萌宠小欣子 $RELEASE_TAG" \
+              --notes-file .github/release-v0.1.0.md
+          fi
+
+          gh release upload "$RELEASE_TAG" \
+            installers/v0.1.0/MengChong-XiaoXinZi_0.1.0_windows-x64-setup.exe \
+            installers/v0.1.0/MengChong-XiaoXinZi_0.1.0_macos-arm64.dmg \
+            installers/v0.1.0/MengChong-XiaoXinZi_0.1.0_macos-intel.dmg \
+            installers/v0.1.0/SHA256SUMS.txt \
+            --clobber
