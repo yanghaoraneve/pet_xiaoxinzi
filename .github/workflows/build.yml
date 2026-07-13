@@ -15,12 +15,15 @@ jobs:
           - platform: macos-14
             target: aarch64-apple-darwin
             artifact: macos-arm64
-          - platform: macos-13
+            bundles: app,dmg
+          - platform: macos-15-intel
             target: x86_64-apple-darwin
             artifact: macos-intel
+            bundles: app,dmg
           - platform: windows-latest
             target: x86_64-pc-windows-msvc
             artifact: windows-x64
+            bundles: nsis
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
@@ -37,7 +40,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Build application
-        run: pnpm exec tauri build --target ${{ matrix.target }}
+        run: pnpm exec tauri build --target ${{ matrix.target }} --bundles ${{ matrix.bundles }}
       - uses: actions/upload-artifact@v4
         with:
           name: pet-xiaoxinzi-${{ matrix.artifact }}
