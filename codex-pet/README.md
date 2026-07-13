@@ -7,7 +7,7 @@
 - `installed/pet.json`：Codex 桌宠清单。
 - `installed/spritesheet.webp`：1536 × 1872、8 列 × 9 行的透明动画图集。
 
-将 `installed/` 中的两个文件复制到 `~/.codex/pets/gugu/`，即可作为原有 `gugu` 桌宠使用。复制前建议备份同名目录。
+将 `installed/` 中的两个文件复制到 `~/.codex/pets/xiaoxinzi/`，即可作为 `xiaoxinzi` 桌宠使用。
 
 ## QA 与生成记录
 
