@@ -1,0 +1,3 @@
+7cb9c0c0c268bddaccfa94a39680d9ea8b06b649f3ff2e464a7f912400c28698  MengChong-XiaoXinZi_0.1.0_windows-x64-setup.exe
+ca4daca91814930ce62fba0a77ddc13b33cf4634d3dc25e071f8283ce566cd18  MengChong-XiaoXinZi_0.1.0_macos-arm64.dmg
+7f96f47b3a158f5a580e55696999e2c862ff6c8f1acdac574e0f326094fcf526  MengChong-XiaoXinZi_0.1.0_macos-intel.dmg
