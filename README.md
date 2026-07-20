@@ -29,11 +29,9 @@
 
 | 系统 | 适用设备 | 安装包 |
 | --- | --- | --- |
-| Windows x64 | Windows 10/11 64 位 | [下载 `.exe`](https://github.com/yanghaoraneve/pet_xiaoxinzi/releases/download/v0.1.0/MengChong-XiaoXinZi_0.1.0_windows-x64-setup.exe) |
-| macOS Apple Silicon | M1/M2/M3/M4 等 Apple 芯片 Mac | [下载 `.dmg`](https://github.com/yanghaoraneve/pet_xiaoxinzi/releases/download/v0.1.0/MengChong-XiaoXinZi_0.1.0_macos-arm64.dmg) |
-| macOS Intel | Intel 芯片 Mac | [下载 `.dmg`](https://github.com/yanghaoraneve/pet_xiaoxinzi/releases/download/v0.1.0/MengChong-XiaoXinZi_0.1.0_macos-intel.dmg) |
-
-安装包的完整性校验值见 [SHA256SUMS.txt](https://github.com/yanghaoraneve/pet_xiaoxinzi/releases/download/v0.1.0/SHA256SUMS.txt)。
+| Windows x64 | Windows 10/11 64 位 | [下载 `.exe`](https://github.com/yanghaoraneve/pet_xiaoxinzi/releases/download/v0.2.0/_0.2.0_x64-setup.exe) |
+| macOS Apple Silicon | M1/M2/M3/M4 等 Apple 芯片 Mac | [下载 `.dmg`](https://github.com/yanghaoraneve/pet_xiaoxinzi/releases/download/v0.2.0/_0.2.0_aarch64.dmg) |
+| macOS Intel | Intel 芯片 Mac | [下载 `.dmg`](https://github.com/yanghaoraneve/pet_xiaoxinzi/releases/download/v0.2.0/_0.2.0_x64.dmg) |
 
 ## 安装与使用
 
@@ -69,6 +67,8 @@
 3. 发现新版本后确认下载；App 会显示进度，安装完成后自动重启。
 
 App 每 24 小时还会进行一次静默检查。只有 Tauri 签名验证通过的 GitHub Release 更新包才会被安装；检查失败不会影响桌宠的离线使用。
+
+v0.1.0 尚未包含应用内更新模块，需要先从 Releases 手动安装一次 v0.2.0；此后的版本即可直接在 App 内检查和安装。
 
 ## Codex 桌宠资源
 
