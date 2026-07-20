@@ -1,9 +1,7 @@
 # 萌宠小欣子
 
 <p align="center">
-  <img src="docs/images/xiaoxinzi-preview.png" height="420" alt="萌宠小欣子经典波点皮肤" />
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="docs/images/xiaoxinzi-aqua-preview.png" height="420" alt="萌宠小欣子浅蓝礼服皮肤" />
+  <img src="docs/images/xiaoxinzi-skins-preview.png" width="520" alt="萌宠小欣子经典波点与浅蓝礼服皮肤" />
 </p>
 <p align="center">
   <sub>经典波点皮肤　·　浅蓝礼服皮肤</sub>
