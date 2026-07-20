@@ -1,9 +1,12 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
+import { getVersion } from "@tauri-apps/api/app";
 import {
   getCurrentWindow,
   LogicalSize,
 } from "@tauri-apps/api/window";
+import { relaunch } from "@tauri-apps/plugin-process";
+import { check, type Update } from "@tauri-apps/plugin-updater";
 
 type Direction = "left" | "right";
 type PetState =
@@ -26,6 +29,16 @@ interface PetMetadata {
   rows: Record<PetState, RowMetadata>;
 }
 
+interface SkinDefinition {
+  name: string;
+  frame_base: string;
+}
+
+interface SkinManifest {
+  default_skin: string;
+  skins: Record<string, SkinDefinition>;
+}
+
 const appWindow = getCurrentWindow();
 function requiredElement<T extends Element>(selector: string): T {
   const element = document.querySelector<T>(selector);
@@ -36,6 +49,8 @@ function requiredElement<T extends Element>(selector: string): T {
 const petImage = requiredElement<HTMLImageElement>("#pet-frame");
 const loading = requiredElement<HTMLElement>("#loading");
 const menu = requiredElement<HTMLElement>("#pet-menu");
+const versionInfo = requiredElement<HTMLElement>("#version-info");
+const updateButton = requiredElement<HTMLButtonElement>('button[data-action="check-update"]');
 
 const ACTIONS: PetState[] = [
   "waving",
@@ -50,8 +65,13 @@ const AUTO_WALK_MIN_MS = 4_500;
 const AUTO_WALK_MAX_MS = 7_500;
 const AUTO_REST_MIN_MS = 3_500;
 const AUTO_REST_MAX_MS = 6_500;
+const SKIN_STORAGE_KEY = "pet-xiaoxinzi-skin";
+const UPDATE_LAST_CHECK_KEY = "pet-xiaoxinzi-update-last-check";
+const UPDATE_CHECK_INTERVAL_MS = 24 * 60 * 60 * 1_000;
 
 let metadata: PetMetadata;
+let skinManifest: SkinManifest;
+let currentSkin = "";
 let currentState: PetState = "idle";
 let currentFrame = 0;
 let frameTimer: number | null = null;
@@ -68,9 +88,16 @@ let downY = 0;
 let lastWindowX: number | null = null;
 let dragIdleTimer: number | null = null;
 let clickIndex = 0;
+let currentVersion = "";
+let updateCheckRunning = false;
+let updateInstallRunning = false;
+let noticeTimer: number | null = null;
+const preloadedSkins = new Set<string>();
 
-function frameUrl(state: PetState, index: number): string {
-  return `/assets/frames/${state}/${String(index).padStart(2, "0")}.png`;
+function frameUrl(state: PetState, index: number, skin = currentSkin): string {
+  const base = skinManifest.skins[skin]?.frame_base;
+  if (!base) throw new Error(`Unknown skin: ${skin}`);
+  return `${base}/${state}/${String(index).padStart(2, "0")}.png`;
 }
 
 function showFrame(): void {
@@ -147,19 +174,167 @@ async function stopWalking(returnToIdle: boolean): Promise<void> {
   if (returnToIdle && !dragging && actionTimer === null) startAnimation("idle");
 }
 
-async function preloadFrames(): Promise<void> {
-  const tasks: Promise<void>[] = [];
+async function preloadFrames(skin: string): Promise<void> {
+  if (preloadedSkins.has(skin)) return;
+  const tasks: Promise<boolean>[] = [];
   for (const [state, row] of Object.entries(metadata.rows) as [PetState, RowMetadata][]) {
     for (let index = 0; index < row.frame_count; index += 1) {
       tasks.push(new Promise((resolve) => {
         const image = new Image();
-        image.onload = () => resolve();
-        image.onerror = () => resolve();
-        image.src = frameUrl(state, index);
+        image.onload = () => resolve(true);
+        image.onerror = () => resolve(false);
+        image.src = frameUrl(state, index, skin);
       }));
     }
   }
-  await Promise.all(tasks);
+  const results = await Promise.all(tasks);
+  if (results.some((loaded) => !loaded)) {
+    throw new Error(`Unable to preload every frame for skin: ${skin}`);
+  }
+  preloadedSkins.add(skin);
+}
+
+function updateSkinButtons(): void {
+  menu.querySelectorAll<HTMLButtonElement>("button[data-skin]").forEach((button) => {
+    const skin = button.dataset.skin ?? "";
+    const selected = skin === currentSkin;
+    button.textContent = `${selected ? "✓ " : ""}${skinManifest.skins[skin]?.name ?? skin}`;
+    button.setAttribute("aria-pressed", String(selected));
+  });
+}
+
+function showNotice(message: string, durationMs = 2_200): void {
+  if (noticeTimer !== null) window.clearTimeout(noticeTimer);
+  loading.textContent = message;
+  loading.hidden = false;
+  if (durationMs > 0) {
+    noticeTimer = window.setTimeout(() => {
+      loading.hidden = true;
+      noticeTimer = null;
+    }, durationMs);
+  }
+}
+
+function updateVersionInfo(latestVersion?: string): void {
+  const current = currentVersion ? `v${currentVersion}` : "未知";
+  versionInfo.textContent = latestVersion
+    ? `当前 ${current} · 可更新至 v${latestVersion}`
+    : `当前版本：${current}`;
+}
+
+async function installUpdate(update: Update): Promise<void> {
+  const notes = update.body?.trim();
+  const message = [
+    `发现新版本 v${update.version}，是否现在下载并安装？`,
+    notes ? `\n更新说明：\n${notes}` : "",
+    "\n安装完成后萌宠小欣子会自动重启。",
+  ].join("");
+  if (!window.confirm(message)) {
+    await update.close();
+    return;
+  }
+
+  updateInstallRunning = true;
+  updateButton.disabled = true;
+  let downloaded = 0;
+  let contentLength = 0;
+  try {
+    showNotice(`正在准备更新至 v${update.version}…`, 0);
+    await update.downloadAndInstall((event) => {
+      if (event.event === "Started") {
+        contentLength = event.data.contentLength ?? 0;
+        showNotice(`正在下载 v${update.version}…`, 0);
+      } else if (event.event === "Progress") {
+        downloaded += event.data.chunkLength;
+        const percent = contentLength > 0
+          ? Math.min(100, Math.round((downloaded / contentLength) * 100))
+          : null;
+        showNotice(percent === null ? "正在下载更新…" : `正在下载更新… ${percent}%`, 0);
+      } else if (event.event === "Finished") {
+        showNotice("更新下载完成，正在安装…", 0);
+      }
+    });
+    showNotice("更新完成，正在重新启动…", 0);
+    await new Promise((resolve) => window.setTimeout(resolve, 450));
+    await relaunch();
+  } finally {
+    updateInstallRunning = false;
+    updateButton.disabled = false;
+  }
+}
+
+async function checkForUpdates(interactive: boolean): Promise<void> {
+  if (updateCheckRunning || updateInstallRunning) {
+    if (interactive) showNotice("更新任务正在进行中");
+    return;
+  }
+
+  updateCheckRunning = true;
+  updateButton.disabled = true;
+  updateButton.textContent = "正在检查…";
+  if (interactive) showNotice("正在检查新版本…", 0);
+
+  try {
+    const update = await check({ timeout: 30_000 });
+    localStorage.setItem(UPDATE_LAST_CHECK_KEY, String(Date.now()));
+    if (!update) {
+      updateVersionInfo();
+      updateButton.textContent = "检查更新";
+      if (interactive) showNotice(`当前 v${currentVersion} 已是最新版本`);
+      return;
+    }
+
+    updateVersionInfo(update.version);
+    updateButton.textContent = `更新至 v${update.version}`;
+    if (interactive) {
+      await installUpdate(update);
+    } else {
+      showNotice(`发现新版本 v${update.version}，右键可更新`, 4_000);
+      await update.close();
+    }
+  } catch (error) {
+    updateVersionInfo();
+    updateButton.textContent = "重新检查更新";
+    console.error("Unable to check for updates", error);
+    if (interactive) showNotice("暂时无法检查更新，请稍后重试");
+  } finally {
+    updateCheckRunning = false;
+    updateButton.disabled = updateInstallRunning;
+  }
+}
+
+async function setupUpdater(): Promise<void> {
+  currentVersion = await getVersion();
+  updateVersionInfo();
+  const lastCheck = Number(localStorage.getItem(UPDATE_LAST_CHECK_KEY) ?? "0");
+  if (!Number.isFinite(lastCheck) || Date.now() - lastCheck >= UPDATE_CHECK_INTERVAL_MS) {
+    window.setTimeout(() => void checkForUpdates(false), 1_500);
+  }
+}
+
+async function selectSkin(skin: string): Promise<void> {
+  if (!skinManifest.skins[skin] || skin === currentSkin) {
+    updateSkinButtons();
+    return;
+  }
+
+  loading.textContent = `正在换上${skinManifest.skins[skin].name}…`;
+  loading.hidden = false;
+  try {
+    await preloadFrames(skin);
+    currentSkin = skin;
+    currentFrame = 0;
+    localStorage.setItem(SKIN_STORAGE_KEY, skin);
+    showFrame();
+    updateSkinButtons();
+    loading.hidden = true;
+  } catch (error) {
+    loading.textContent = "皮肤资源加载失败";
+    console.error(error);
+    window.setTimeout(() => {
+      loading.hidden = true;
+    }, 1_800);
+  }
 }
 
 function setupPointerInteractions(): void {
@@ -254,9 +429,14 @@ function setupMenu(): void {
     const target = (event.target as HTMLElement).closest<HTMLButtonElement>("button");
     if (!target) return;
     const state = target.dataset.state as PetState | undefined;
+    const skin = target.dataset.skin;
     const action = target.dataset.action;
     menu.hidden = true;
 
+    if (skin) {
+      void selectSkin(skin);
+      return;
+    }
     if (state) {
       playAction(state, state === "idle" ? 1 : 2);
       return;
@@ -269,6 +449,10 @@ function setupMenu(): void {
         clearRoamTimer();
         void stopWalking(true);
       }
+      return;
+    }
+    if (action === "check-update") {
+      void checkForUpdates(true);
       return;
     }
     if (action === "resize") {
@@ -293,14 +477,28 @@ function setupMenu(): void {
 }
 
 async function main(): Promise<void> {
-  const response = await fetch("/assets/metadata.json");
-  if (!response.ok) throw new Error("Unable to load pet metadata");
-  metadata = await response.json() as PetMetadata;
-  await preloadFrames();
+  const [metadataResponse, skinsResponse] = await Promise.all([
+    fetch("/assets/metadata.json"),
+    fetch("/assets/skins.json"),
+  ]);
+  if (!metadataResponse.ok) throw new Error("Unable to load pet metadata");
+  if (!skinsResponse.ok) throw new Error("Unable to load skin metadata");
+  metadata = await metadataResponse.json() as PetMetadata;
+  skinManifest = await skinsResponse.json() as SkinManifest;
+
+  const storedSkin = localStorage.getItem(SKIN_STORAGE_KEY);
+  currentSkin = storedSkin && skinManifest.skins[storedSkin]
+    ? storedSkin
+    : skinManifest.default_skin;
+  if (!skinManifest.skins[currentSkin]) throw new Error("Default skin is missing");
+
+  await preloadFrames(currentSkin);
   loading.hidden = true;
   startAnimation("idle");
   setupPointerInteractions();
   setupMenu();
+  updateSkinButtons();
+  await setupUpdater();
 
   await listen<{ direction: Direction }>("walk-direction", (event) => {
     if (!walking) return;

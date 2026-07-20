@@ -166,6 +166,8 @@ pub fn run() {
     let motion_for_setup = motion.clone();
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_process::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .manage(AppState { motion })
         .setup(move |app| {
             let tray = setup_tray(app.handle())?;

@@ -1,4 +1,4 @@
-name: Build desktop apps
+name: Build and publish desktop updates
 
 on:
   workflow_dispatch:
@@ -6,46 +6,70 @@ on:
     tags:
       - "v*"
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  publish:
     strategy:
       fail-fast: false
       matrix:
         include:
           - platform: macos-14
             target: aarch64-apple-darwin
-            artifact: macos-arm64
             bundles: app,dmg
+            apple_signing_identity: "-"
           - platform: macos-15-intel
             target: x86_64-apple-darwin
-            artifact: macos-intel
             bundles: app,dmg
+            apple_signing_identity: "-"
           - platform: windows-latest
             target: x86_64-pc-windows-msvc
-            artifact: windows-x64
             bundles: nsis
+            apple_signing_identity: ""
+
     runs-on: ${{ matrix.platform }}
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: pnpm/action-setup@v4
         with:
           version: 10
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
+
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Build application
-        run: pnpm exec tauri build --target ${{ matrix.target }} --bundles ${{ matrix.bundles }}
-      - uses: actions/upload-artifact@v4
+
+      - name: Build, sign and publish
+        uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ matrix.apple_signing_identity }}
         with:
-          name: pet-xiaoxinzi-${{ matrix.artifact }}
-          path: |
-            src-tauri/target/${{ matrix.target }}/release/bundle/dmg/*
-            src-tauri/target/${{ matrix.target }}/release/bundle/macos/*
-            src-tauri/target/${{ matrix.target }}/release/bundle/msi/*
-            src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*
+          tagName: v__VERSION__
+          releaseName: "萌宠小欣子 v__VERSION__"
+          releaseBody: |
+            新版本现已发布。App 内可通过右键菜单“检查更新”下载安装；也可在本 Release 手动下载安装包。
+          generateReleaseNotes: true
+          releaseDraft: false
+          prerelease: false
+          uploadUpdaterJson: true
+          updaterJsonPreferNsis: true
+          uploadUpdaterSignatures: true
+          uploadWorkflowArtifacts: true
+          args: --target ${{ matrix.target }} --bundles ${{ matrix.bundles }}

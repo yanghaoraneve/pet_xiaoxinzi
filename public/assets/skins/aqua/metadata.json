@@ -1,0 +1,1656 @@
+{
+  "schema": "generic-hd-desktop-pet-v1",
+  "resized": false,
+  "sampling": "none",
+  "state_order": [
+    "idle",
+    "running-right",
+    "running-left",
+    "waving",
+    "jumping",
+    "failed",
+    "waiting",
+    "running",
+    "review"
+  ],
+  "cell_size": [
+    724,
+    724
+  ],
+  "atlas_grid": [
+    8,
+    9
+  ],
+  "atlas_size": [
+    5792,
+    6516
+  ],
+  "rows": {
+    "idle": {
+      "row": 0,
+      "frame_count": 6,
+      "duration_ms_per_frame": 180,
+      "source": "rows-alpha/idle.png",
+      "source_size": [
+        2172,
+        724
+      ],
+      "split_cuts": [
+        0,
+        368,
+        730,
+        1092,
+        1454,
+        1809,
+        2172
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/idle/00.png",
+          "source_segment": [
+            0,
+            0,
+            368,
+            724
+          ],
+          "source_bbox": [
+            107,
+            30,
+            286,
+            657
+          ],
+          "paste_xy": [
+            272,
+            30
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 1,
+          "file": "frames/idle/01.png",
+          "source_segment": [
+            368,
+            0,
+            730,
+            724
+          ],
+          "source_bbox": [
+            470,
+            30,
+            648,
+            657
+          ],
+          "paste_xy": [
+            273,
+            30
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 2,
+          "file": "frames/idle/02.png",
+          "source_segment": [
+            730,
+            0,
+            1092,
+            724
+          ],
+          "source_bbox": [
+            831,
+            31,
+            1010,
+            660
+          ],
+          "paste_xy": [
+            272,
+            31
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 3,
+          "file": "frames/idle/03.png",
+          "source_segment": [
+            1092,
+            0,
+            1454,
+            724
+          ],
+          "source_bbox": [
+            1192,
+            31,
+            1372,
+            661
+          ],
+          "paste_xy": [
+            272,
+            31
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 4,
+          "file": "frames/idle/04.png",
+          "source_segment": [
+            1454,
+            0,
+            1809,
+            724
+          ],
+          "source_bbox": [
+            1547,
+            31,
+            1726,
+            660
+          ],
+          "paste_xy": [
+            272,
+            31
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 5,
+          "file": "frames/idle/05.png",
+          "source_segment": [
+            1809,
+            0,
+            2172,
+            724
+          ],
+          "source_bbox": [
+            1894,
+            31,
+            2071,
+            661
+          ],
+          "paste_xy": [
+            273,
+            31
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        }
+      ],
+      "animation": "animations/idle.png"
+    },
+    "running-right": {
+      "row": 1,
+      "frame_count": 8,
+      "duration_ms_per_frame": 90,
+      "source": "rows-alpha/running-right.png",
+      "source_size": [
+        2172,
+        724
+      ],
+      "split_cuts": [
+        0,
+        261,
+        558,
+        809,
+        1077,
+        1327,
+        1614,
+        1885,
+        2172
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/running-right/00.png",
+          "source_segment": [
+            0,
+            0,
+            261,
+            724
+          ],
+          "source_bbox": [
+            28,
+            80,
+            238,
+            658
+          ],
+          "paste_xy": [
+            257,
+            80
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 1,
+          "file": "frames/running-right/01.png",
+          "source_segment": [
+            261,
+            0,
+            558,
+            724
+          ],
+          "source_bbox": [
+            285,
+            83,
+            555,
+            657
+          ],
+          "paste_xy": [
+            227,
+            83
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 2,
+          "file": "frames/running-right/02.png",
+          "source_segment": [
+            558,
+            0,
+            809,
+            724
+          ],
+          "source_bbox": [
+            563,
+            83,
+            809,
+            659
+          ],
+          "paste_xy": [
+            239,
+            83
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 3,
+          "file": "frames/running-right/03.png",
+          "source_segment": [
+            809,
+            0,
+            1077,
+            724
+          ],
+          "source_bbox": [
+            809,
+            84,
+            1077,
+            657
+          ],
+          "paste_xy": [
+            228,
+            84
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 4,
+          "file": "frames/running-right/04.png",
+          "source_segment": [
+            1077,
+            0,
+            1327,
+            724
+          ],
+          "source_bbox": [
+            1077,
+            83,
+            1311,
+            657
+          ],
+          "paste_xy": [
+            245,
+            83
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 5,
+          "file": "frames/running-right/05.png",
+          "source_segment": [
+            1327,
+            0,
+            1614,
+            724
+          ],
+          "source_bbox": [
+            1345,
+            83,
+            1604,
+            657
+          ],
+          "paste_xy": [
+            232,
+            83
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 6,
+          "file": "frames/running-right/06.png",
+          "source_segment": [
+            1614,
+            0,
+            1885,
+            724
+          ],
+          "source_bbox": [
+            1626,
+            83,
+            1884,
+            657
+          ],
+          "paste_xy": [
+            233,
+            83
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 7,
+          "file": "frames/running-right/07.png",
+          "source_segment": [
+            1885,
+            0,
+            2172,
+            724
+          ],
+          "source_bbox": [
+            1888,
+            83,
+            2124,
+            658
+          ],
+          "paste_xy": [
+            244,
+            83
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        }
+      ],
+      "animation": "animations/running-right.png"
+    },
+    "running-left": {
+      "row": 2,
+      "frame_count": 8,
+      "duration_ms_per_frame": 90,
+      "source": "rows-alpha/running-left.png",
+      "source_size": [
+        2172,
+        724
+      ],
+      "split_cuts": [
+        0,
+        283,
+        531,
+        778,
+        1071,
+        1344,
+        1585,
+        1838,
+        2172
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/running-left/00.png",
+          "source_segment": [
+            0,
+            0,
+            283,
+            724
+          ],
+          "source_bbox": [
+            46,
+            82,
+            275,
+            661
+          ],
+          "paste_xy": [
+            247,
+            82
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 1,
+          "file": "frames/running-left/01.png",
+          "source_segment": [
+            283,
+            0,
+            531,
+            724
+          ],
+          "source_bbox": [
+            293,
+            82,
+            521,
+            661
+          ],
+          "paste_xy": [
+            248,
+            82
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 2,
+          "file": "frames/running-left/02.png",
+          "source_segment": [
+            531,
+            0,
+            778,
+            724
+          ],
+          "source_bbox": [
+            542,
+            81,
+            778,
+            659
+          ],
+          "paste_xy": [
+            244,
+            81
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 3,
+          "file": "frames/running-left/03.png",
+          "source_segment": [
+            778,
+            0,
+            1071,
+            724
+          ],
+          "source_bbox": [
+            778,
+            82,
+            1046,
+            658
+          ],
+          "paste_xy": [
+            228,
+            82
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 4,
+          "file": "frames/running-left/04.png",
+          "source_segment": [
+            1071,
+            0,
+            1344,
+            724
+          ],
+          "source_bbox": [
+            1097,
+            81,
+            1312,
+            661
+          ],
+          "paste_xy": [
+            254,
+            81
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 5,
+          "file": "frames/running-left/05.png",
+          "source_segment": [
+            1344,
+            0,
+            1585,
+            724
+          ],
+          "source_bbox": [
+            1377,
+            81,
+            1561,
+            657
+          ],
+          "paste_xy": [
+            270,
+            81
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 6,
+          "file": "frames/running-left/06.png",
+          "source_segment": [
+            1585,
+            0,
+            1838,
+            724
+          ],
+          "source_bbox": [
+            1609,
+            81,
+            1838,
+            661
+          ],
+          "paste_xy": [
+            247,
+            81
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 7,
+          "file": "frames/running-left/07.png",
+          "source_segment": [
+            1838,
+            0,
+            2172,
+            724
+          ],
+          "source_bbox": [
+            1839,
+            81,
+            2108,
+            658
+          ],
+          "paste_xy": [
+            227,
+            81
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        }
+      ],
+      "animation": "animations/running-left.png"
+    },
+    "waving": {
+      "row": 3,
+      "frame_count": 4,
+      "duration_ms_per_frame": 150,
+      "source": "rows-alpha/waving.png",
+      "source_size": [
+        2172,
+        724
+      ],
+      "split_cuts": [
+        0,
+        543,
+        1069,
+        1629,
+        2172
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/waving/00.png",
+          "source_segment": [
+            0,
+            0,
+            543,
+            724
+          ],
+          "source_bbox": [
+            176,
+            23,
+            370,
+            707
+          ],
+          "paste_xy": [
+            265,
+            23
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 1,
+          "file": "frames/waving/01.png",
+          "source_segment": [
+            543,
+            0,
+            1069,
+            724
+          ],
+          "source_bbox": [
+            687,
+            23,
+            907,
+            707
+          ],
+          "paste_xy": [
+            252,
+            23
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 2,
+          "file": "frames/waving/02.png",
+          "source_segment": [
+            1069,
+            0,
+            1629,
+            724
+          ],
+          "source_bbox": [
+            1187,
+            23,
+            1444,
+            707
+          ],
+          "paste_xy": [
+            233,
+            23
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 3,
+          "file": "frames/waving/03.png",
+          "source_segment": [
+            1629,
+            0,
+            2172,
+            724
+          ],
+          "source_bbox": [
+            1792,
+            23,
+            1986,
+            707
+          ],
+          "paste_xy": [
+            265,
+            23
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        }
+      ],
+      "animation": "animations/waving.png"
+    },
+    "jumping": {
+      "row": 4,
+      "frame_count": 5,
+      "duration_ms_per_frame": 110,
+      "source": "rows-alpha/jumping.png",
+      "source_size": [
+        2172,
+        724
+      ],
+      "split_cuts": [
+        0,
+        374,
+        856,
+        1321,
+        1775,
+        2172
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/jumping/00.png",
+          "source_segment": [
+            0,
+            0,
+            374,
+            724
+          ],
+          "source_bbox": [
+            59,
+            175,
+            294,
+            673
+          ],
+          "paste_xy": [
+            244,
+            175
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 1,
+          "file": "frames/jumping/01.png",
+          "source_segment": [
+            374,
+            0,
+            856,
+            724
+          ],
+          "source_bbox": [
+            423,
+            84,
+            848,
+            674
+          ],
+          "paste_xy": [
+            149,
+            84
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 2,
+          "file": "frames/jumping/02.png",
+          "source_segment": [
+            856,
+            0,
+            1321,
+            724
+          ],
+          "source_bbox": [
+            865,
+            18,
+            1310,
+            441
+          ],
+          "paste_xy": [
+            139,
+            18
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 3,
+          "file": "frames/jumping/03.png",
+          "source_segment": [
+            1321,
+            0,
+            1775,
+            724
+          ],
+          "source_bbox": [
+            1334,
+            85,
+            1706,
+            678
+          ],
+          "paste_xy": [
+            176,
+            85
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 4,
+          "file": "frames/jumping/04.png",
+          "source_segment": [
+            1775,
+            0,
+            2172,
+            724
+          ],
+          "source_bbox": [
+            1894,
+            186,
+            2120,
+            677
+          ],
+          "paste_xy": [
+            249,
+            186
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        }
+      ],
+      "animation": "animations/jumping.png"
+    },
+    "failed": {
+      "row": 5,
+      "frame_count": 8,
+      "duration_ms_per_frame": 160,
+      "source": "rows-alpha/failed.png",
+      "source_size": [
+        2172,
+        724
+      ],
+      "split_cuts": [
+        0,
+        285,
+        560,
+        837,
+        1102,
+        1368,
+        1635,
+        1895,
+        2172
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/failed/00.png",
+          "source_segment": [
+            0,
+            0,
+            285,
+            724
+          ],
+          "source_bbox": [
+            63,
+            52,
+            232,
+            658
+          ],
+          "paste_xy": [
+            277,
+            52
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 1,
+          "file": "frames/failed/01.png",
+          "source_segment": [
+            285,
+            0,
+            560,
+            724
+          ],
+          "source_bbox": [
+            341,
+            49,
+            511,
+            658
+          ],
+          "paste_xy": [
+            277,
+            49
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 2,
+          "file": "frames/failed/02.png",
+          "source_segment": [
+            560,
+            0,
+            837,
+            724
+          ],
+          "source_bbox": [
+            625,
+            58,
+            794,
+            663
+          ],
+          "paste_xy": [
+            277,
+            58
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 3,
+          "file": "frames/failed/03.png",
+          "source_segment": [
+            837,
+            0,
+            1102,
+            724
+          ],
+          "source_bbox": [
+            885,
+            68,
+            1053,
+            664
+          ],
+          "paste_xy": [
+            278,
+            68
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 4,
+          "file": "frames/failed/04.png",
+          "source_segment": [
+            1102,
+            0,
+            1368,
+            724
+          ],
+          "source_bbox": [
+            1167,
+            67,
+            1327,
+            663
+          ],
+          "paste_xy": [
+            282,
+            67
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 5,
+          "file": "frames/failed/05.png",
+          "source_segment": [
+            1368,
+            0,
+            1635,
+            724
+          ],
+          "source_bbox": [
+            1411,
+            60,
+            1582,
+            663
+          ],
+          "paste_xy": [
+            276,
+            60
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 6,
+          "file": "frames/failed/06.png",
+          "source_segment": [
+            1635,
+            0,
+            1895,
+            724
+          ],
+          "source_bbox": [
+            1689,
+            72,
+            1844,
+            663
+          ],
+          "paste_xy": [
+            284,
+            72
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 7,
+          "file": "frames/failed/07.png",
+          "source_segment": [
+            1895,
+            0,
+            2172,
+            724
+          ],
+          "source_bbox": [
+            1947,
+            66,
+            2107,
+            665
+          ],
+          "paste_xy": [
+            282,
+            66
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        }
+      ],
+      "animation": "animations/failed.png"
+    },
+    "waiting": {
+      "row": 6,
+      "frame_count": 6,
+      "duration_ms_per_frame": 220,
+      "source": "rows-alpha/waiting.png",
+      "source_size": [
+        2172,
+        724
+      ],
+      "split_cuts": [
+        0,
+        342,
+        735,
+        1056,
+        1460,
+        1801,
+        2172
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/waiting/00.png",
+          "source_segment": [
+            0,
+            0,
+            342,
+            724
+          ],
+          "source_bbox": [
+            103,
+            18,
+            300,
+            714
+          ],
+          "paste_xy": [
+            263,
+            18
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 1,
+          "file": "frames/waiting/01.png",
+          "source_segment": [
+            342,
+            0,
+            735,
+            724
+          ],
+          "source_bbox": [
+            385,
+            19,
+            659,
+            713
+          ],
+          "paste_xy": [
+            225,
+            19
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 2,
+          "file": "frames/waiting/02.png",
+          "source_segment": [
+            735,
+            0,
+            1056,
+            724
+          ],
+          "source_bbox": [
+            825,
+            20,
+            1011,
+            714
+          ],
+          "paste_xy": [
+            269,
+            20
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 3,
+          "file": "frames/waiting/03.png",
+          "source_segment": [
+            1056,
+            0,
+            1460,
+            724
+          ],
+          "source_bbox": [
+            1103,
+            18,
+            1385,
+            713
+          ],
+          "paste_xy": [
+            221,
+            18
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 4,
+          "file": "frames/waiting/04.png",
+          "source_segment": [
+            1460,
+            0,
+            1801,
+            724
+          ],
+          "source_bbox": [
+            1551,
+            19,
+            1729,
+            713
+          ],
+          "paste_xy": [
+            273,
+            19
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 5,
+          "file": "frames/waiting/05.png",
+          "source_segment": [
+            1801,
+            0,
+            2172,
+            724
+          ],
+          "source_bbox": [
+            1875,
+            18,
+            2075,
+            713
+          ],
+          "paste_xy": [
+            262,
+            18
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        }
+      ],
+      "animation": "animations/waiting.png"
+    },
+    "running": {
+      "row": 7,
+      "frame_count": 6,
+      "duration_ms_per_frame": 100,
+      "source": "rows-alpha/running.png",
+      "source_size": [
+        2172,
+        724
+      ],
+      "split_cuts": [
+        0,
+        371,
+        727,
+        1093,
+        1440,
+        1795,
+        2172
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/running/00.png",
+          "source_segment": [
+            0,
+            0,
+            371,
+            724
+          ],
+          "source_bbox": [
+            120,
+            38,
+            293,
+            666
+          ],
+          "paste_xy": [
+            275,
+            38
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 1,
+          "file": "frames/running/01.png",
+          "source_segment": [
+            371,
+            0,
+            727,
+            724
+          ],
+          "source_bbox": [
+            477,
+            39,
+            642,
+            666
+          ],
+          "paste_xy": [
+            279,
+            39
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 2,
+          "file": "frames/running/02.png",
+          "source_segment": [
+            727,
+            0,
+            1093,
+            724
+          ],
+          "source_bbox": [
+            843,
+            38,
+            1013,
+            666
+          ],
+          "paste_xy": [
+            277,
+            38
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 3,
+          "file": "frames/running/03.png",
+          "source_segment": [
+            1093,
+            0,
+            1440,
+            724
+          ],
+          "source_bbox": [
+            1177,
+            39,
+            1347,
+            666
+          ],
+          "paste_xy": [
+            277,
+            39
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 4,
+          "file": "frames/running/04.png",
+          "source_segment": [
+            1440,
+            0,
+            1795,
+            724
+          ],
+          "source_bbox": [
+            1521,
+            38,
+            1680,
+            666
+          ],
+          "paste_xy": [
+            282,
+            38
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 5,
+          "file": "frames/running/05.png",
+          "source_segment": [
+            1795,
+            0,
+            2172,
+            724
+          ],
+          "source_bbox": [
+            1870,
+            38,
+            2038,
+            666
+          ],
+          "paste_xy": [
+            278,
+            38
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        }
+      ],
+      "animation": "animations/running.png"
+    },
+    "review": {
+      "row": 8,
+      "frame_count": 6,
+      "duration_ms_per_frame": 200,
+      "source": "rows-alpha/review.png",
+      "source_size": [
+        2172,
+        724
+      ],
+      "split_cuts": [
+        0,
+        396,
+        731,
+        1086,
+        1414,
+        1763,
+        2172
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "file": "frames/review/00.png",
+          "source_segment": [
+            0,
+            0,
+            396,
+            724
+          ],
+          "source_bbox": [
+            0,
+            58,
+            343,
+            724
+          ],
+          "paste_xy": [
+            190,
+            58
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 1,
+          "file": "frames/review/01.png",
+          "source_segment": [
+            396,
+            0,
+            731,
+            724
+          ],
+          "source_bbox": [
+            485,
+            64,
+            651,
+            687
+          ],
+          "paste_xy": [
+            279,
+            64
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 2,
+          "file": "frames/review/02.png",
+          "source_segment": [
+            731,
+            0,
+            1086,
+            724
+          ],
+          "source_bbox": [
+            831,
+            60,
+            995,
+            685
+          ],
+          "paste_xy": [
+            280,
+            60
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 3,
+          "file": "frames/review/03.png",
+          "source_segment": [
+            1086,
+            0,
+            1414,
+            724
+          ],
+          "source_bbox": [
+            1178,
+            61,
+            1343,
+            688
+          ],
+          "paste_xy": [
+            279,
+            61
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 4,
+          "file": "frames/review/04.png",
+          "source_segment": [
+            1414,
+            0,
+            1763,
+            724
+          ],
+          "source_bbox": [
+            1470,
+            59,
+            1648,
+            683
+          ],
+          "paste_xy": [
+            273,
+            59
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        },
+        {
+          "index": 5,
+          "file": "frames/review/05.png",
+          "source_segment": [
+            1763,
+            0,
+            2172,
+            724
+          ],
+          "source_bbox": [
+            1806,
+            59,
+            1985,
+            683
+          ],
+          "paste_xy": [
+            272,
+            59
+          ],
+          "size": [
+            724,
+            724
+          ],
+          "resized": false
+        }
+      ],
+      "animation": "animations/review.png"
+    }
+  }
+}

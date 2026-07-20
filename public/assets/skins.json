@@ -1,0 +1,13 @@
+{
+  "default_skin": "classic",
+  "skins": {
+    "classic": {
+      "name": "经典波点",
+      "frame_base": "/assets/frames"
+    },
+    "aqua": {
+      "name": "浅蓝礼服",
+      "frame_base": "/assets/skins/aqua/frames"
+    }
+  }
+}
